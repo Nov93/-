@@ -15,7 +15,7 @@ driver.maximize_window() # Максимальный размер окна
 # Оформление процесса тестирования в виде функции
 def login():
     user_name=driver.find_element(By.XPATH,'//*[@id="user-name"]') # Поиск поля для ввода логина
-    login="standart_user"
+    login="standard_user"
     user_name.send_keys(login) # Ввод имени пользователя
     file.write("Success write login\n") # Запись в лог
 
@@ -30,7 +30,16 @@ def login():
 
 sleep(2)
 
+def test_login_redirect(): # Функция правильного открытия нужной веб. страницы
+    correct_url="https://www.saucedemo.com/inventory.html"
+    get_url = driver.current_url
+
+    assert correct_url == get_url, "test_login_redirect is Failed"
+    file.write("test_login_redirect is OK\n")
+
 login()
+sleep(2)
+test_login_redirect()
 sleep(2)
 file.close()
 sleep(2)
