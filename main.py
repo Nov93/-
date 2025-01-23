@@ -36,11 +36,18 @@ def test_login_redirect(): # Функция правильного открыт�
 
     assert correct_url == get_url, "test_login_redirect is Failed"
     file.write("test_login_redirect is OK\n")
+def test_context_after_login_is_correct(): # Проверка правильного текста на странице
+    correct_text = "Products"
+    current_text = driver.find_element(By.XPATH, '//*[@id="header_container"]/div[2]/span')
+    assert correct_text == current_text.text, "test_context_after_login_is_correct is Failed"
+    file.write("test_context_after_login_is_correct is OK \n")
 
 login()
 sleep(2)
 test_login_redirect()
+test_context_after_login_is_correct()
 sleep(2)
+
 file.close()
 sleep(2)
 driver.quit() # Закрытие файла и завершение работы драйвера
